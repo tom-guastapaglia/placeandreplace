@@ -34,7 +34,7 @@ def get_footer_text():
     except FileNotFoundError:
         print(f"⚠️  Le fichier footer.txt n'a pas été trouvé à l'emplacement : {FOOTER_PATH}")
         print("➡️  Création du fichier footer.txt avec le texte par défaut")
-        default_footer = "© 2024 So'Managements | Mentions légales"
+        default_footer = "© 2024 Management Solution | Mentions légales"
         with open(FOOTER_PATH, 'w', encoding='utf-8') as f:
             f.write(default_footer)
         return default_footer

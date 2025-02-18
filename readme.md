@@ -1,4 +1,4 @@
-# So'Managements - Gestionnaire de Documents 📄
+# Management Solution - Gestionnaire de Documents 📄
 
 Application web permettant de gérer automatiquement les en-têtes et pieds de page des documents professionnels.
 
@@ -123,7 +123,7 @@ git push origin feature/ma-fonctionnalite
 
 ## 📝 Licence
 
-© 2024 So'Managements - Tous droits réservés
+© 2024 Management Solution - Tous droits réservés
 
 ## 📞 Support
 

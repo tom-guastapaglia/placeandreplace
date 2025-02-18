@@ -17,7 +17,7 @@ import zipfile
 from io import BytesIO
 
 st.set_page_config(
-    page_title="So'Managements - Gestionnaire de Documents",
+    page_title="Management Solution - Gestionnaire de Documents",
     page_icon="📄",
     layout="wide"
 )
@@ -64,7 +64,7 @@ def reprocess_all_documents():
 def main():
     init_session_state()
     
-    st.title("🏢 So'Managements - Gestionnaire de Documents")
+    st.title("🏢 Management Solution - Gestionnaire de Documents")
     
     # Création des colonnes pour une meilleure organisation
     col1, col2 = st.columns([2, 1])
