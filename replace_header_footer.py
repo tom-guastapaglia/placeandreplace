@@ -1,5 +1,7 @@
 import os
 from pathlib import Path
+from docx import Document
+from docx.shared import Inches
 
 # Configuration des chemins
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
