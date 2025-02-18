@@ -1,14 +1,29 @@
 {
     "builds": [
         {
-            "src": "api/index.py",
-            "use": "@vercel/python"
+            "src": "api/wsgi.py",
+            "use": "@vercel/python",
+            "config": { 
+                "maxLambdaSize": "50mb",
+                "runtime": "python3.11",
+                "includeFiles": [
+                    "app/**/*.py",
+                    "requirements.txt",
+                    "footer.txt",
+                    "logo.png"
+                ]
+            }
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "api/index.py"
+            "dest": "api/wsgi.py"
         }
-    ]
+    ],
+    "env": {
+        "PYTHONPATH": ".",
+        "STREAMLIT_SERVER_PORT": "8501",
+        "STREAMLIT_SERVER_ADDRESS": "0.0.0.0"
+    }
 } 

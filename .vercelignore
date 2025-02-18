@@ -2,23 +2,32 @@
 input_docs/
 output_docs/
 pdf_output/
+static/uploads/
 tmp/
-
-# Cache et environnement
-__pycache__/
-*.pyc
-.env
-venv/
-.vercel
 
 # Fichiers de données
 *.docx
 *.xlsx
 *.pptx
 *.pdf
+*.png
+*.jpg
+*.jpeg
+
+# Cache et environnement
+__pycache__/
+*.pyc
+.env
+venv/
+.venv/
+env/
+.pytest_cache/
+.coverage
+.DS_Store
 
 # Logs
 *.log
+logs/
 
 # IDE
 .vscode/
