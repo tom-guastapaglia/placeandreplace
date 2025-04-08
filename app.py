@@ -823,15 +823,50 @@ def main():
             with col2:
                 client_to_delete = st.selectbox(
                     "Sélectionner un client pour le supprimer",
-                    [client["name"] for client in clients]
+                    [client["name"] for client in clients],
+                    key="delete_client_selectbox"
                 )
                 
-                if st.button("Supprimer ce client"):
-                    if st.session_state.selected_client_id:
-                        delete_client(st.session_state.selected_client_id)
+                # Trouver l'ID du client sélectionné pour la suppression
+                selected_client_to_delete = next((c for c in clients if c["name"] == client_to_delete), None)
+                
+                # Initialiser les variables d'état si elles n'existent pas
+                if "delete_confirmation_requested" not in st.session_state:
+                    st.session_state.delete_confirmation_requested = False
+                if "client_to_delete_id" not in st.session_state:
+                    st.session_state.client_to_delete_id = None
+                
+                # Fonction pour demander confirmation
+                def request_delete_confirmation():
+                    st.session_state.delete_confirmation_requested = True
+                    if selected_client_to_delete:
+                        st.session_state.client_to_delete_id = selected_client_to_delete["id"]
+                
+                # Fonction pour confirmer la suppression
+                def confirm_delete():
+                    if st.session_state.client_to_delete_id:
+                        delete_client(st.session_state.client_to_delete_id)
+                        st.session_state.delete_confirmation_requested = False
+                        st.session_state.client_to_delete_id = None
+                        reset_client_data()
                         st.success(f"✅ Client '{client_to_delete}' supprimé avec succès!")
-                        st.session_state.selected_client_id = None
                         st.rerun()
+                
+                # Fonction pour annuler la suppression
+                def cancel_delete():
+                    st.session_state.delete_confirmation_requested = False
+                    st.session_state.client_to_delete_id = None
+                
+                # Afficher le bouton de suppression initial ou la confirmation
+                if not st.session_state.delete_confirmation_requested:
+                    st.button("Supprimer ce client", on_click=request_delete_confirmation, disabled=not selected_client_to_delete)
+                else:
+                    st.warning(f"⚠️ Êtes-vous sûr de vouloir supprimer définitivement le client '{client_to_delete}'? Cette action est irréversible.")
+                    col_confirm, col_cancel = st.columns(2)
+                    with col_confirm:
+                        st.button("☢️ Oui, supprimer", on_click=confirm_delete, key="confirm_delete_btn")
+                    with col_cancel:
+                        st.button("❌ Annuler", on_click=cancel_delete, key="cancel_delete_btn")
 
 if __name__ == "__main__":
     main() 
